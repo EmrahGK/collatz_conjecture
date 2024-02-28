@@ -14,6 +14,9 @@ bu programın yazılış amacı, x sayısı için bu işlemleri yapacak bir algo
 şey, sayının çift mi tek mi olduğunu gösteren bir fonksiyon yazmak. gerisi beleş 
 """
 from sys import stdout
+import numpy as np 
+import matplotlib.pyplot as plt
+
 def status(sayi):
     kalan = sayi %2
     if(kalan == 0): #sayi çift ise
@@ -29,7 +32,7 @@ print("""
 ___________________________________
         COLLATZ PROBLEMİ
         
-    (çıkmak için q'ya basın)
+    (çıkmak için q yazın)
 ___________________________________
 """)
 
@@ -37,7 +40,10 @@ while True:
     sayı = input("\nLütfen bir sayı girin: ")
     liste = []
     if(sayı == "q"):
-        print("\nProgramdan çıkılıyor..\n")
+        print("Programdan çıkılyor..")
+        break
+    if(sayı == "0"):
+        print("Dalga mı geçiyosun hemşerim.")
         break
     try:
         sayı = int(sayı)
@@ -52,10 +58,18 @@ while True:
             sayı = int((sayı*3) + 1) 
         ekle(liste,sayı)
 
-    print("\nÇözüm kümesi: \n")
+    print("\nÇözüm kümesi: ")
+
     for i in liste:
         i = str(i)
         stdout.write(i)
         stdout.write(",")
         stdout.flush()
     print("\n")
+    print(f"Çözüm kümesi {len(liste)} elemanlıdır.")     
+    x = [s for s in range(len(liste))]
+    y = [a for a in liste]
+
+    print("Grafik:")
+    plt.plot(x,y)
+    plt.show()
